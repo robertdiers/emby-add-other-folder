@@ -99,22 +99,24 @@ public class Checker {
                 if (sub.isDirectory()) {
                     containsFolder = true;                    
                 }              
+            }           
+            
+            //check stored ones if there is a parent element with data
+            if (containsData) {
+                for (String stored : foldersWithDataAndSubfolders) {
+                    if (foldername.startsWith(stored)) {
+                        if (!foldersWithDataAndSubfolderData.contains(stored)) {
+                            foldersWithDataAndSubfolderData.add(stored);
+                            //System.out.println("data and folders with data: "+stored);
+                        }
+                    }
+                }
             }
             
             //store this one
             if (containsData && containsFolder) {
                 foldersWithDataAndSubfolders.add(foldername);
                 //System.out.println("data and folders: "+foldername);
-            }
-            
-            //check stored ones if there is a parent element
-            for (String stored : foldersWithDataAndSubfolders) {
-                if (foldername.startsWith(stored)) {
-                    if (!foldersWithDataAndSubfolderData.contains(stored)) {
-                        foldersWithDataAndSubfolderData.add(stored);
-                        //System.out.println("data and folders with data: "+stored);
-                    }
-                }
             }
             
             //recursion
